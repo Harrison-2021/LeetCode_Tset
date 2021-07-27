@@ -18,4 +18,15 @@ public class Offer05 {
 		String newStr = new String(array, 0, size);
 		return newStr;
     }
+	
+	public String replaceSpace2(String s) {
+		StringBuilder res = new StringBuilder();
+		for(char c : s.toCharArray()) {
+			if(c == ' ') res.append("%20");
+			else {
+				res.append(c);
+			}
+		}
+		return res.toString();
+    }
 }
