@@ -5,34 +5,27 @@ import java.util.Stack;
 public class Offer09 {
 	Stack<Integer> inputS;
 	Stack<Integer> outputS;
-	int size;
-	
-	public Offer09() {
-		inputS = new Stack<Integer>();
-		outputS = new Stack<Integer>();
-		size = 0;
-    }
 
+    public Offer09() {
+        inputS = new Stack<Integer>();
+        outputS = new Stack<Integer>();
+    }
+    
     public void appendTail(int value) {
-    	inputS.push(value);
-    	size ++;
+        inputS.push(value);
     }
     
     public int deleteHead() {
-    	if(this.size != 0) {
-			if(outputS.size() == 0) {
-	    		while(inputS.size() > 0) {
-		    		outputS.push(inputS.pop());
-		    	}
-	    		size --;
-	    		return outputS.pop();
-			} 
-			else {
-				size --;
-	    		return outputS.pop();
-	    	} 
-    	} else {
-    		return -1;
-    	}
+        if (outputS.isEmpty()) {
+            while (!inputS.isEmpty()) {
+                outputS.push(inputS.pop());
+            }
+        } 
+        if (outputS.isEmpty()) {
+            return -1;
+        } else {
+            int deleteItem = outputS.pop();
+            return deleteItem;
+        }
     }
 }
