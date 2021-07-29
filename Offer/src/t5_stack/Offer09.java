@@ -21,11 +21,10 @@ public class Offer09 {
         } 
         // 不能单独用inputS来判定队列是否为空，当两个栈都为空时，队列为空
         // 注意判断的顺序性
-        else {
-            while (!inputS.isEmpty()) {
-                outputS.push(inputS.pop());
-            }
-            return outputS.isEmpty() ? -1 : outputS.pop();
-        } 
+        if(inputS.isEmpty()) return -1;
+        while (!inputS.isEmpty()) {
+            outputS.push(inputS.pop());
+        }
+        return outputS.pop();
     }
 }
