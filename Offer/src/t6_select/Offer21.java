@@ -21,7 +21,7 @@ public class Offer21 {
 		return arr;
     }
 	
-	// 原地查找
+	// 原地查找 首尾双指针
 	public int[] exchange2(int[] nums) {
 		int left = 0, right = nums.length -1;
 		
@@ -40,6 +40,19 @@ public class Offer21 {
 		return nums;
     }
 	
+	//原地查找 快慢双指针
+	public int[] exchange3(int[] nums) {
+		int fast = 0, low = 0;
+		
+		while(fast < nums.length) {
+			if((nums[fast] & 1) == 1) {
+				swap(nums, fast, low);
+				low ++;
+			}
+			fast ++;
+		}
+		return nums;
+	}
 	private void swap(int[] nums, int left, int right) {
 		int t = nums[left];
 		nums[left] = nums[right];
@@ -48,7 +61,7 @@ public class Offer21 {
 		
 	public static void main(String[] args) {
 		int[] nums = {1,2,3,4};
-		int[] arr = new Offer21().exchange2(nums);
+		int[] arr = new Offer21().exchange3(nums);
 		for(int i = 0; i < arr.length; i ++) {
 			System.out.println(arr[i]);
 		}
