@@ -26,23 +26,25 @@ public class Offer21 {
 		int left = 0, right = nums.length -1;
 		
 		while(left < right) {
-			if(nums[left] % 2 == 1) {
+			if((nums[left] & 1) == 1) {
 				left ++;
-			} else if(nums[left] % 2 == 0) {
-				if(nums[right] % 2 == 1) {
-					int t = nums[left];
-					nums[left] = nums[right];
-					nums[right] = t;
-					left ++;
-					right --;
-				} else if(nums[right] % 2 == 0) {
-					right --;
-				}
+				continue;
+			} 
+			if((nums[right] & 1) == 0) {
+				right --;
+				continue;
 			}
+			swap(nums, left, right);
 		}
 		
 		return nums;
     }
+	
+	private void swap(int[] nums, int left, int right) {
+		int t = nums[left];
+		nums[left] = nums[right];
+		nums[right] = t;
+	}
 		
 	public static void main(String[] args) {
 		int[] nums = {1,2,3,4};
