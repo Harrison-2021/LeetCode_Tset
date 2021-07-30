@@ -14,18 +14,16 @@ class _30_MinStack {
     
     public void push(int x) {
     	stack.push(x);
-    	if(link.isEmpty()) {
-    		link.addFirst(x);
-    	} else if(link.peek() > x) {
-    		link.addFirst(x);
-    	}  else { // 注意一定要将两个容器size保持一致，否则会有空指针错误
-    		link.addFirst(link.peek());
+    	if(link.isEmpty() || link.peek() >= x) { // 注意一定包括=，防止重复最小值被弹出
+    		link.push(x); // equals addFirst
     	}
     }
     
     public void pop() {
+    	if(link.peek().equals(stack.peek())) {
+    		link.pop(); // equals removeFirst().
+    	}
     	stack.pop();
-    	link.pop();
     }
     
     public int top() {
