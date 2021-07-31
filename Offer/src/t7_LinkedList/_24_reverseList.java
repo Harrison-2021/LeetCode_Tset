@@ -24,4 +24,18 @@ public class _24_reverseList {
 		
 		return left;
     }
+	
+	// 递归法
+	public ListNode reverseList2(ListNode head) {
+		if(head == null || head.next == null) {// 微观语义只是head.next == null,head==null是边界条件
+			return head;
+		}
+		
+		ListNode newHead = reverseList2(head.next); // 宏观语义，head.next已经排好序，并且返回了hean.next
+													// 接下来要处理head.next 与 head 的关系
+		head.next.next = head;
+		head.next = null;
+		
+		return newHead;
+	}
 }
