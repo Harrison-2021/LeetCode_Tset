@@ -13,16 +13,16 @@ public class _6_reversePrint {
 	
 	public int[] reversePrint(ListNode head) {
 		ListNode cur = head;
-		LinkedList<Integer> linked = new LinkedList<Integer>();
+		LinkedList<ListNode> linked = new LinkedList<>();
 				
 		while(cur != null) {
-			linked.push(cur.val);
+			linked.push(cur);
 			cur = cur.next;
 		}
 		
 		int[] arr = new int[linked.size()];
 		for(int i = 0; i < arr.length; i ++) {
-			arr[i] = linked.pop();
+			arr[i] = linked.pop().val;
 		}
 		
 		return arr;
