@@ -10,21 +10,16 @@ public class _24_reverseList {
 	}
 	
 	public ListNode reverseList(ListNode head) {
-		if(head == null) {
-			return null;
-		}
-		
 		ListNode left = null;
 		ListNode mid = head;
-		ListNode right = mid.next;
 				
-		while(mid != null) {
-			mid.next = left;
-			left = mid;
+		while(mid != null) { // 边界判断的核心是head即mid是否为空，可以整合
+			ListNode right = mid.next; // mid不为空，有next时，保存next节点
+			
+			mid.next = left; // 核心代码，改变指向
+			
+			left = mid; // 维护两个确定的实指针
 			mid = right;
-			if(right != null) {
-				right = right.next;
-			}
 		}
 		
 		return left;
