@@ -2,11 +2,11 @@ package t5_stack;
 
 import java.util.Stack;
 
-public class Offer09 {
+public class _09_CQueue {
 	Stack<Integer> inputS;
 	Stack<Integer> outputS;
 
-    public Offer09() {
+    public _09_CQueue() {
         inputS = new Stack<Integer>();
         outputS = new Stack<Integer>();
     }
