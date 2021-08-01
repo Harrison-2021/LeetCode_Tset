@@ -9,33 +9,25 @@ public class _25_mergeTwoLists {
 		}
 	}
 	public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-		if(l1 == null) return l2;
-		if(l2 == null) return l1;
+		// 引用虚拟头节点可以简化代码
+		ListNode dummyHead = new ListNode(0);
+		ListNode prePrt = dummyHead;
 		
-		ListNode newHead = null;
-		ListNode prePrt = null;
-		ListNode prt1 = l1;
-		ListNode prt2 = l2;
-		if(l1.val < l2.val) {
-			newHead = l1;
-			prt1 = l1.next; 
-		} else {
-			newHead = l2;
-			prt2 = l2.next;
-		}
-		prePrt = newHead;
-			
-		while(prt1 != null && prt2 != null) {
-			if(prt1.val < prt2.val) {
-				prePrt.next = prt1;
-				prt1 = prt1.next;
+		while(l1 != null && l2 != null) {
+			if(l1.val < l2.val) {
+				prePrt.next = l1;
+				l1 = l1.next;
 			} else {
-				prePrt.next = prt2;
-				prt2 = prt2.next;
+				prePrt.next = l2;
+				l2 = l2.next;
 			}
-			prePrt = prePrt.next;			                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+			prePrt = prePrt.next;	
 		}
-		return newHead;
+		
+		// 最后要连接上剩下的元素
+		prePrt.next = (l1 != null ? l1 : l2);
+		
+		return dummyHead.next;
     }
 	
 }
