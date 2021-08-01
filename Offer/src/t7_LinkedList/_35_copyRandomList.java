@@ -44,14 +44,17 @@ public class _35_copyRandomList {
         Node pit2 = head.next;
         Node resHead = pit2;
         
-        while(pit1 != null) { 
-        	pit1.next = pit2.next;
+        while(pit2.next != null) { // 防止代码错误，可以在终止条件上就避免空指针错误
+        	pit1.next = pit1.next.next;
+        	pit2.next = pit2.next.next;
         	pit1 = pit1.next;
-        	if(pit2.next != null) {
-        		pit2.next = pit2.next.next;
-        		pit2 = pit2.next;
-        	}
+        	pit2 = pit2.next;
+//        	if(pit2.next != null) {
+//        		pit2.next = pit2.next.next;
+//        		pit2 = pit2.next;
+//        	}        	
         }
+        pit1.next = null; // 维护旧链表的完整性
         
         return resHead;
     }
