@@ -1,5 +1,7 @@
 package t7_LinkedList;
 
+import java.util.*;
+
 public class _35_copyRandomList {
 	class Node {
 	    int val;
@@ -53,4 +55,28 @@ public class _35_copyRandomList {
         
         return resHead;
     }
+	
+	// 哈希表法，映射，就是影子工程
+	public Node copyRandomList2(Node head) {
+		if(head == null) return null;
+		
+		Node cur = head;
+		Map<Node, Node> map = new HashMap<>(); // 父类引用指向子类对象
+		
+		// 添加键值对，旧节点映射新节点
+		while(cur != null) {
+			map.put(cur, new Node(cur.val));
+			cur = cur.next;
+		}
+		
+		// 添加新链表节点的next。random，参考旧链表的对应的节点
+		cur = head;
+		while(cur != null) {
+			map.get(cur).next = map.get(cur.next);
+			map.get(cur).random = map.get(cur.random);
+			cur = cur.next;
+		}
+		
+		return map.get(head);
+	}
 }
