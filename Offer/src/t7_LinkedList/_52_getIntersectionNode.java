@@ -1,5 +1,7 @@
 package t7_LinkedList;
 
+import java.util.*;
+
 public class _52_getIntersectionNode {
 	public class ListNode {
 	      int val;
@@ -11,47 +13,47 @@ public class _52_getIntersectionNode {
 	  }
 	
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+    	// headA: a + c, headB: b + c => a+c+b = b+c+a,
+    	// 即当两链表相交，只要两链表走了这么多步，一定到达相同节点，否则都指向空，返回空
     	if(headA == null || headB == null) return null;
-    	if(headA == headB) return headA;
     	
-        // 查找两个链表相差的个数
-    	ListNode pit1 = headA;
-    	ListNode pit2 = headB;
+    	ListNode pitA = headA;
+    	ListNode pitB = headB;
     	
-    	while(pit1 != null && pit2 != null) {
-    		pit1 = pit1.next;
-    		pit2 = pit2.next;
+    	while(pitA != pitB) {
+    		pitA = pitA != null ? pitA.next : headB;
+    		pitB = pitB != null ? pitB.next : headA;		
     	}
     	
-    	// 让长的链表先查找k个，再与短的链表一同推进，当推进到同一个节点时，结束
-    	// 返回该相同的节点
-    	if(pit1 != null) {
-    		return getIntersectionNode(pit2, pit1, headB, headA);
-    	}
-    	else {
-    		return getIntersectionNode(pit1, pit2, headA, headB);
-    	}	
+    	return pitA;
     }
     
-    private ListNode getIntersectionNode(ListNode shortPit, ListNode longPit, ListNode shortHead, ListNode longHead) {
-    	int k = 0;
-    	while(longPit != null) {
-    		longPit = longPit.next;
-			k ++;
-		}
-		
-    	shortPit = shortHead;
-		longPit = longHead;
-		for(int i = 0; i < k; i ++) {
-			longPit = longPit.next;
-		}
-		
-		while(shortPit != longPit) {
-			longPit = longPit.next;
-			shortPit = shortPit.next;
-		}
-		return shortPit;
-   }
+    
+
+    // 哈希表法，解决链表不易查询的问题
+    public ListNode getIntersectionNode2(ListNode headA, ListNode headB) {
+    	//if(headA == null || headB == null) return null;
+    	//if(headA == headB) return headA;
+    	
+    	// 因为两链表可能长短不一，不适合用映射，而是单数据的集合比较合适
+    	Set<ListNode> set = new HashSet<>();
+    	ListNode cur = headA;
+    	
+    	while(cur != null) {
+    		set.add(cur);
+    		cur = cur.next;
+    	}
+    	
+    	cur = headB;
+    	while(cur != null) {
+    		if(set.contains(cur)) {
+    			return cur;
+    		}
+    		cur = cur.next;
+    	}
+    	
+    	return null;
+    }
 }    
   
 
