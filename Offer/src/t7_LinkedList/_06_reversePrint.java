@@ -3,7 +3,7 @@ package t7_LinkedList;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class _6_reversePrint {
+public class _06_reversePrint {
 	public class ListNode {
 		int val;
 		ListNode next;
