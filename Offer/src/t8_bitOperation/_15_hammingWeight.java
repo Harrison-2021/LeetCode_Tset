@@ -23,11 +23,16 @@ public class _15_hammingWeight {
 	 public int hammingWeight2(int n) {
 		 // 位运算法
 		 int count = 0;
-		 for(int i = 0; i < 32; i ++) {
-			 int mark = 1 << i; // 左移i位，低位取0， 高位取1
-			 if((n & mark) != 0) { // 每次从低到高进行比较一位，同为1.为1，否则为0
-				 count ++;
-			 }
+//		 for(int i = 0; i < 32; i ++) {
+//			 int mark = 1 << i; // 左移i位，低位取0， 高位取1
+//			 if((n & mark) != 0) { // 每次从低到高进行比较一位，同为1.为1，否则为0
+//				 count ++;
+//			 }
+//		 }
+		 
+		 while(n != 0) {
+			 count += (n & 1);
+			 n >>>= 1; // java 中无符号右移>>>=
 		 }
 		 return count;
 	 }
