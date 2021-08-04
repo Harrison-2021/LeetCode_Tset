@@ -50,30 +50,18 @@ public class _39_majorityElement {
 		return majorityEntry.getKey();
 	}
 	
-	// 不额外开O(n)空间，只有O(1)
+	// 不额外开O(n)空间，只有O(1),摩尔投票法
 	public int majorityElement3(int[] nums) {
 		// 没两个数进行比较，不同就相消，形同留下，数组就用最后一个索引下标来维护数组元素大小
-		int lastCount = 1;
-		int lastNum = nums[0];
-		
+		int mode = 0, votes = 0;
 		for(int k : nums) {
-			if(lastNum == k) {
-				lastCount ++;
-			} else {
-				lastCount --;
-				if(lastCount == 0) {
-					lastNum = k;
-					lastCount = 1;
-				}
-			}
-		}
-		//本题设定是一定存在一个数的次数比数组一半多，目标是找到这个数
-//		if(lastCount <= 0) {
-//			return 0;
-//		} else {
-//			return lastNum; 
-//		}
-		return lastNum;
+			if(votes == 0) {
+				mode = k; // 假定第一个是众数，只要抵消位零时，消除的所有元素一定是小于等于一半的众数，最后剩下的一定是众数
+			} 
+			votes += (k == mode) ? 1: -1;
+		}	
+		
+		return mode;
 		
 	}
 	
