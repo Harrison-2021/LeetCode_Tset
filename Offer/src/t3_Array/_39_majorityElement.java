@@ -51,23 +51,22 @@ public class _39_majorityElement {
 	// 不额外开O(n)空间，只有O(1)
 	public int majorityElement3(int[] nums) {
 		// 没两个数进行比较，不同就相消，形同留下，数组就用最后一个索引下标来维护数组元素大小
-		int lastCount = 0;
-		int lastNum = 0;
+		int lastCount = 1;
+		int lastNum = nums[0];
 		
 		for(int k : nums) {
-			if(lastCount == 0) {
-				lastNum = k;
-				lastCount = 1;
+			if(lastNum == k) {
+				lastCount ++;
 			} else {
-				if(lastNum == k) {
-					lastCount ++;
-				} else {
-					lastCount --;
+				lastCount --;
+				if(lastCount == 0) {
+					lastNum = k;
+					lastCount = 1;
 				}
 			}
 		}
 		
-		if(lastCount == 0) {
+		if(lastCount <= 0) {
 			return 0;
 		} else {
 			return lastNum; //本题设定是找到最多的元素，就是比数组一半长度多
