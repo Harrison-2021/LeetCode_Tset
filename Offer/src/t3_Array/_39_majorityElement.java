@@ -3,7 +3,9 @@ package t3_Array;
 import java.util.*;
 
 /**
- * @author ls2690069470 Offer 39. 数组中出现次数超过一半的数字
+ * @author ls2690069470 
+ * 	Offer 39. 数组中出现次数超过一半的数字,请找出这个数字
+ * 	本题设定是一定存在一个数的次数比数组一半多，目标是找到这个数
  */
 public class _39_majorityElement {
 	// 开额外空间O(n)
@@ -65,12 +67,19 @@ public class _39_majorityElement {
 				}
 			}
 		}
+		//本题设定是一定存在一个数的次数比数组一半多，目标是找到这个数
+//		if(lastCount <= 0) {
+//			return 0;
+//		} else {
+//			return lastNum; 
+//		}
+		return lastNum;
 		
-		if(lastCount <= 0) {
-			return 0;
-		} else {
-			return lastNum; //本题设定是找到最多的元素，就是比数组一半长度多
-		}
-		
+	}
+	
+	// 先排序，此时的中位数一定是那个出现次数大于数组一半的数
+	public int majorityElement4(int[] nums) {
+		Arrays.sort(nums);
+		return nums[nums.length >> 2];
 	}
 }
