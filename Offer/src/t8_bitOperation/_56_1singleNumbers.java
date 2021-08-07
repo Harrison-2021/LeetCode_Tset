@@ -48,4 +48,28 @@ public class _56_1singleNumbers {
 		num = num >> indexOf1;
 		return (num & 1) == 1;
 	}
+	
+	// 代码简化
+	public int[] singleNumbers2(int[] nums) {
+		int resXor = 0;
+		for(int n : nums) {
+			resXor ^= n;
+		}
+		
+		int div = 1; // div可以直接作为分组条件,而不是具体找到从右边起第几个数
+		while((resXor & div) == 0) {
+			div <<= 1;
+		}
+		
+		int num1 = 0, num2 = 0;
+		for(int n : nums) {
+			if((div & n) != 0) {
+				num1 ^= n;
+			} else {
+				num2 ^= n;
+			}
+		}
+		
+		return new int[] {num1, num2}; // 简便写法
+	}
 }
