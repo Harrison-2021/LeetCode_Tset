@@ -47,7 +47,7 @@ public class _49_nthUglyNumber {
         Set<Long> seen = new HashSet<Long>();
         PriorityQueue<Long> heap = new PriorityQueue<Long>();
         seen.add(1L);
-        heap.offer(1L);
+        heap.add(1L);
         int ugly = 0;
         for (int i = 0; i < n; i++) {
             long curr = heap.poll();
@@ -55,7 +55,7 @@ public class _49_nthUglyNumber {
             for (int factor : factors) {
                 long next = curr * factor;
                 if (seen.add(next)) {
-                    heap.offer(next);
+                    heap.add(next);
                 }
             }
         }
