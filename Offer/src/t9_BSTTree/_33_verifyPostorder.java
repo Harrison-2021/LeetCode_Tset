@@ -1,5 +1,6 @@
 package t9_BSTTree;
 
+import java.util.Stack;
 
 /**
  * @author ls2690069470
@@ -13,6 +14,8 @@ public class _33_verifyPostorder {
 	 }
 
 	private boolean verifyPostorder(int[] postorder, int r, int l) {
+		if(r >= l) return true;
+		
 		int root = postorder[l];
 		// find left node
 		int i = r;
@@ -43,4 +46,18 @@ public class _33_verifyPostorder {
 		}
 		return left && rigth;
 	}
+	
+	// 辅助单调栈
+	public boolean verifyPostorder2(int[] postorder) {
+        Stack<Integer> stack = new Stack<>();
+        int root = Integer.MAX_VALUE;
+        for(int i = postorder.length - 1; i >= 0; i--) {
+            if(postorder[i] > root) return false;
+            while(!stack.isEmpty() && stack.peek() > postorder[i])
+            	root = stack.pop();
+            stack.add(postorder[i]);
+        }
+        return true;
+    }
+
 }
