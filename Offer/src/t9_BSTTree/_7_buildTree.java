@@ -1,5 +1,8 @@
 package t9_BSTTree;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author ls2690069470 Offer 07. 重建二叉树
  */
@@ -13,12 +16,19 @@ public class _7_buildTree {
 			val = x;
 		}
 	}
-
+	// 可用哈希表快速定位到in_order中根节点位置
+	Map<Integer, Integer> rootMap;
 	public TreeNode buildTree(int[] preorder, int[] inorder) {
 		if(preorder.length == 0 || inorder.length == 0
 				|| preorder.length != inorder.length) return null;
 		
 		int length = preorder.length;
+		
+		rootMap= new HashMap<Integer, Integer>();
+		for(int i = 0; i < length; i ++) {
+			rootMap.put(inorder[i], i);
+		}
+		
 		return buildTree(preorder, 0, length - 1, inorder, 0, length - 1);
 	}
 	
@@ -36,14 +46,16 @@ public class _7_buildTree {
 		}
 		
 		// find the location of root in in_order 
-		int rootIn = startIn;
-		while(rootIn <= endIn && in[rootIn] != rootValue) {
-			rootIn ++;
-		}
+//		int rootIn = startIn;
+//		while(rootIn <= endIn && in[rootIn] != rootValue) {
+//			rootIn ++;
+//		}
+//		
+//		if(rootIn == endIn && in[rootIn] != rootValue) {
+//			throw new IllegalArgumentException("invalid input!");
+//		}
 		
-		if(rootIn == endIn && in[rootIn] != rootValue) {
-			throw new IllegalArgumentException("invalid input!");
-		}
+		int rootIn = rootMap.get(root.val);
 		
 		// build leftChild
 		int leftLength = rootIn - startIn;
