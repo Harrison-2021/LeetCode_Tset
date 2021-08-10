@@ -27,29 +27,30 @@ public class _32_2levelOrder {
 		}
 		
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
-		int nextLever = 0; // next lever's number
-		int curNum = 1;    // cur lever's number
+//		int nextLever = 0; // next lever's number
+//		int curNum = 1;    // cur lever's number
 		
 		while(!queue.isEmpty()) {
 			List<Integer> temp = new ArrayList<Integer>();
 			
-			for(int i = 0; i < curNum; i ++) {
+//			for(int i = 0; i < curNum; i ++) {
+			for(int i = queue.size(); i > 0; i --) {
 				TreeNode node = queue.poll();
 				if(node.left != null) {
 					queue.add(node.left);
-					nextLever ++;
+//					nextLever ++;
 				}
 				if(node.right != null) {
 					queue.add(node.right);
-					nextLever ++;
+//					nextLever ++;
 				}
 				temp.add(node.val);
 			}
 			
 			res.add(temp);
 			
-			curNum = nextLever;
-			nextLever = 0;
+//			curNum = nextLever;
+//			nextLever = 0;
 		}
 		
 		return res;
