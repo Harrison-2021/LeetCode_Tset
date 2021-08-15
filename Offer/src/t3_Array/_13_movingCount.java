@@ -46,4 +46,22 @@ public class _13_movingCount {
 		}
 		return sum;
 	}
+
+	public int movingCount2(int m, int n, int k) {
+		boolean[][] visted = new boolean[m][n]; // 默认是false
+		
+		return dfs(m, n, k, visted, 0, 0, 0, 0);
+	}
+
+	// 根据规律，机器只能往下，往右走，并且坐标值逢10突变一次，其他值依次加1就行
+	private int dfs(int rows, int cols, int k, boolean[][] visted, int row, int col, int rowSum, int colSum) {
+		if(row >= rows || col >= cols || rowSum + colSum > k || visted[row][col]) {
+			return 0; // 即false，表示此格不算入
+		}
+		visted[row][col] = true;
+		return 1 + dfs(rows, cols, k, visted, 
+				row + 1, col, (row + 1) % 10 == 0 ? rowSum - 8 : rowSum + 1 , colSum)
+				 + dfs(rows, cols, k, visted, 
+						row, col + 1, rowSum, (col + 1) % 10 == 0 ? colSum - 8 : colSum + 1);
+	}
 }
