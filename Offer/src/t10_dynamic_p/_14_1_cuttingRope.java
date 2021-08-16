@@ -4,6 +4,7 @@ package t10_dynamic_p;
  * @author ls2690069470 Offer 14- I. 剪绳子
  */
 public class _14_1_cuttingRope {
+	// 动态规划
 	public int cuttingRope(int n) {
 		if (n < 2)
 			return 0;
@@ -32,5 +33,23 @@ public class _14_1_cuttingRope {
 		}
 		
 		return dp[n];
+	}
+	
+	// 贪心算法
+	public int cuttingRope2(int n) {
+		// 尽量剪出更多的3，剩下如果是4，就剪成长度为2的两段
+		// 关键是如何求出有多少个3和2
+		if(n <= 3) return n - 1;
+		
+		int timesOf3 = n / 3;
+		
+		// 当绳子最后剩下的长度为4时，不能再剪去长度为3的子段
+		if(n - 3 * timesOf3 == 1) {
+			timesOf3 -= 1;
+		}
+		
+		int timesOf2 = (n - timesOf3 * 3) / 2;
+		
+		return (int)Math.pow(3, timesOf3) * (int)Math.pow(2, timesOf2);
 	}
 }
