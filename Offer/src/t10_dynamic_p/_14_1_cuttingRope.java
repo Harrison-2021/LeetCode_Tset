@@ -52,4 +52,15 @@ public class _14_1_cuttingRope {
 		
 		return (int)Math.pow(3, timesOf3) * (int)Math.pow(2, timesOf2);
 	}
+	
+	// 贪心算法代码优化，实质去处3的整数倍后，剩下的元素个数0，1，2 三种情况
+	public int cuttingRope3(int n) {
+        if(n <= 3) return n - 1;
+        int a = n / 3, b = n % 3;
+        if(b == 0) return (int)Math.pow(3, a);
+        if(b == 1) return (int)Math.pow(3, a - 1) * 4;
+		else /* (b == 2) */
+        	return (int)Math.pow(3, a) * 2;
+    }
+
 }
