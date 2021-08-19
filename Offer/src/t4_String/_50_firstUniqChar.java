@@ -46,4 +46,21 @@ public class _50_firstUniqChar {
 		
 		return ' ';
 	}
+	
+	// 只循环判断一次，插入比较法
+	public char firstUniqChar3(String s) {
+        int index = Integer.MAX_VALUE;
+        char ans = ' ';
+        for (char ch = 'a'; ch <= 'z'; ch++) {
+            int st = s.indexOf(ch); // first index,如果在s内，且等于lastIndex，只出现一次
+            if (st != -1 && st == s.lastIndexOf(ch)) {
+                if (index > st) {  // 判断索引是否是最小的，把每次比较最小的赋给ans，即第一个不重复的值
+                    index = st;
+                    ans = ch;
+                }
+            }
+        }
+
+        return ans;
+    }
 }
