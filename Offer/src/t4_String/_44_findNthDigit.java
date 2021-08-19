@@ -38,4 +38,22 @@ public class _44_findNthDigit {
 		if(digits == 1) return 0;
 		return (long)Math.pow(10, digits - 1);
 	}
+	
+	// 可以先把0去掉，简化代码
+	public int findNthDigit2(int n) {
+		int digits = 1;
+		long start = 1; // 从1开始，n从0开始，因此，n表示比目标值大1，方便循环
+		long count = 9; // 从1开始，一位数有9个
+		
+		while(n > count) { // 1.先找数，先找数得范围，即是几位数
+			n -= count;
+			digits ++;
+			start *= 10;
+			count = digits * start * 9;
+		}
+		
+		long num = start + (n -1) / digits; // 2.找到十进制中得数
+		
+		return Long.toString(num).charAt((n - 1) % digits) - '0'; // 先得到字符ASCII码，要减去偏移量，才能得到int型数
+	}
 }
