@@ -80,7 +80,7 @@ public class _40_getLeastNumbers {
 		}
 
 		for (int i = k; i < arr.length; i++) {
-			if (!pq.isEmpty() && arr[i] < pq.peek()) { // pq中的最大值都比要比较的元素小，那么前k个元素一定最小
+			if (!pq.isEmpty() && arr[i] < pq.peek()) { // 反之，arr[i] > qp.mex, 就不操作，即qp中的最大值都比要比较的元素小，那么前k个元素一定最小
 				pq.remove();
 				pq.add(arr[i]);
 			}

@@ -10,13 +10,15 @@ public class _47_maxValue {
 	public int maxValue(int[][] grid) {
 		int n = grid.length, m = grid[0].length;
 		
-		for(int j = 1; j < m; j ++) { // 先处理第一行元素，减少判断，每个格子放路径中累加的结果
+		// 先处理第一行，第一列元素，减少判断，每个格子放路径中累加的结果
+		for(int j = 1; j < m; j ++) { 
 			grid[0][j] = grid[0][j] + grid[0][j - 1];
 		}
 		for(int i = 1; i < n; i ++) { // 先处理第一列
 			grid[i][0] += grid[i - 1][0];
 		}
 		
+		// 处理中间元素，每个元素都有两个源头，找最大的源头
 		for(int i = 1; i < n; i ++) {
 			for(int j = 1; j < m; j ++) {
 				grid[i][j] += Math.max(grid[i - 1][j], grid[i][j - 1]);

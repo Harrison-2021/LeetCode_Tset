@@ -5,7 +5,7 @@ package t3_Array;
  */
 public class _13_movingCount {
 	// 注意，机器人不能跳过去，故，不能通过直接遍历数组来判断，而是应该通过递归判断下个格子能否到达
-	// 只有能到达(i, j)格子后，才能继续走相邻的下个四个方向的格子，是并的关系，都要走一遍试试，不是或的关系
+	// 只有能到达(i, j)格子后，才能继续走相邻的下个四个方向的格子，问题是一共有多少可能，不是只走一条路线，最多走多少格，因此是并的关系，都要走一遍试试，不是或的关系
 	public int movingCount(int m, int n, int k) {
 		// 如果走到之前走过的格子，不能重复计数
 		boolean[] visted = new boolean[m * n];
@@ -47,6 +47,7 @@ public class _13_movingCount {
 		return sum;
 	}
 
+//	方法二、根据规律，排除一些情况，简化流程
 	public int movingCount2(int m, int n, int k) {
 		boolean[][] visted = new boolean[m][n]; // 默认是false
 		
