@@ -31,11 +31,13 @@ public class _24_reverseList {
 			return head;
 		}
 		
-		ListNode newHead = reverseList2(head.next); // 宏观语义，head.next已经排好序，并且返回了hean.next
-													// 接下来要处理head.next 与 head 的关系
+		ListNode newHead = reverseList2(head.next); // 递归深处，找到最后一个节点，设置为新的头节点，也是递归终止的条件
+			
+		// 接下来要处理head.next 与 head 的关系，核心逻辑
 		head.next.next = head;
 		head.next = null;
 		
-		return newHead;
+		return newHead; // 一直将新的节点往上传递，直到所有节点指向都改变完，回到顶部，传回新的链表头节点
 	}
 }
+

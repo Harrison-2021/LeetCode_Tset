@@ -31,6 +31,7 @@ public class _36_treeToDoublyList {
     	inOrder(root);
     	
     	// 为了构建循环列表，将首尾相连
+    	// prePit每次都是维护curPit的值，遍历完后，curPit指向最后一个最大元素，即prePit指向链尾   	
     	head.left = prePit;
     	prePit.right = head;
     	
@@ -43,6 +44,7 @@ public class _36_treeToDoublyList {
     	inOrder(curPit.left);
     	
     	// 将当前找到的node与前一个节点构建成双向链表
+    	// 要维护链表头元素，当prePit为null，即当前节点为头节点，要用一个指针指着，先定义好右索引就行
     	if(prePit == null) {
     		head = curPit;
     	} else {
